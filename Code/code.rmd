@@ -1,0 +1,64 @@
+# Title: GitHubAssignment_506_FinalProject #
+## I have choosen bikeVedors data for my final project. ##
+## Author: Chaithanya Javvaji ##
+## Date: April 14, 2019 ##
+## Output: code.rmd ##
+#Loading new Libraries for my project
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(NbClust)
+library(cluster)
+library(clustertend)
+library(factoextra)
+library(dendextend)
+#Reading the Bikevendor data
+bikeVendors <- read.csv("bikeVendors.csv")
+attach(bikeVendors)
+#Checking Variable names
+names(bikeVendors)
+##97 observations and 35 variables in data, 5 Different variables has been identified 
+#Checking for NA data
+table(is.na(bikeVendors))
+##No Missing Values
+#Checking the top and bottom of the Data
+head(bikeVendors)
+tail(bikeVendors)
+#Questions that I setup on this Data
+##Maximum price for model
+##Minimum Price for model
+##Maximum price for category1
+##Minimum Price for category1
+##Maximum price for category2
+##Minimum Price for category2
+##Maximum price for frame
+##Minimum Price for frame
+#Analysis of Data
+##Summary of Data
+summary(bikeVendors)
+#By observing the summary of whole data. 
+##Observing indeatil summary of model, category1, category2, frame and price variables 
+summary(model)
+##97 different models
+summary(category1)
+##51 Mountain and 46 Road count in category1
+summary(category2)
+##9 different categories in category2
+summary(price)
+##Minimum 415 and Maximum 12790 of Price value
+##Checking the summary and margin for Price 
+quantile(price, seq(0,1,0.1))
+##Indeatil summary of quantile price
+##barplot
+#Plot model vs Price
+ggplot(bikeVendors, aes(x = model, y = price)) + geom_boxplot() + coord_flip()
+##Not clear because of 97 different models
+#Plot category1 vs Price
+ggplot(bikeVendors, aes(x = category1, y = price)) + geom_boxplot() + coord_flip()
+##Mountain category got extensive range of Price and got highest price
+#Plot category1 vs Price
+ggplot(bikeVendors, aes(x = category2, y = price)) + geom_boxplot() + coord_flip()
+##Top Highest Price for Cross Country Race and Over Mountain, Lowest price is for Sport
+#Plot frame vs Price
+ggplot(bikeVendors, aes(x = frame, y = price)) + geom_boxplot() + coord_flip()
+##Carbon frame got Highest price and Aluminum got lowest price

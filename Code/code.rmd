@@ -31,6 +31,7 @@ tail(bikeVendors)
 ##Minimum Price for category2
 ##Maximum price for frame
 ##Minimum Price for frame
+
 #Analysis of Data
 
 #Checking the summary and margin for Price 
@@ -83,3 +84,23 @@ ggplot(bikeVendors, aes(x = frame, y = price, color="blue")) + geom_boxplot() + 
 #Interaction plots frame vs 2 different categories over price 
 interaction.plot(bikeVendors$frame, bikeVendors$category1, bikeVendors$price)
 interaction.plot(bikeVendors$frame, bikeVendors$category2, bikeVendors$price)
+
+#Answers for my Questions that I setup on this Data
+##Maximum price for model
+### 12790 is for 2 models Scalpel-Si Black Inc. and Supersix Evo Black Inc. models
+##Minimum Price for model
+### 415 is for Catalyst 4 model
+##Maximum price for category1
+###Mountain category
+##Minimum Price for category1
+###Road category
+##Maximum price for category2
+###5696.3158 is for Cross Country Race category
+##Minimum Price for category2
+##881.1111 is for Sport category 
+##Maximum price for frame
+##1979.625 is for Aluminum  frame 
+##Minimum Price for frame
+##5339.123 is for Carbon frame
+
+

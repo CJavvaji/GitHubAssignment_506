@@ -7,23 +7,21 @@
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-library(NbClust)
-library(cluster)
-library(clustertend)
-library(factoextra)
-library(dendextend)
+
 #Reading the Bikevendor data
 bikeVendors <- read.csv("bikeVendors.csv")
 attach(bikeVendors)
+
 #Checking Variable names
 names(bikeVendors)
-##97 observations and 35 variables in data, 5 Different variables has been identified 
+
 #Checking for NA data
 table(is.na(bikeVendors))
-##No Missing Values
+
 #Checking the top and bottom of the Data
 head(bikeVendors)
 tail(bikeVendors)
+
 #Questions that I setup on this Data
 ##Maximum price for model
 ##Minimum Price for model
@@ -34,31 +32,54 @@ tail(bikeVendors)
 ##Maximum price for frame
 ##Minimum Price for frame
 #Analysis of Data
-##Summary of Data
-summary(bikeVendors)
-#By observing the summary of whole data. 
-##Observing indeatil summary of model, category1, category2, frame and price variables 
-summary(model)
-##97 different models
-summary(category1)
-##51 Mountain and 46 Road count in category1
-summary(category2)
-##9 different categories in category2
+
+#Checking the summary and margin for Price 
 summary(price)
-##Minimum 415 and Maximum 12790 of Price value
-##Checking the summary and margin for Price 
+##   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   415    1950    3200    3954    5330   12790 
 quantile(price, seq(0,1,0.1))
-##Indeatil summary of quantile price
-##barplot
-#Plot model vs Price
-ggplot(bikeVendors, aes(x = model, y = price)) + geom_boxplot() + coord_flip()
-##Not clear because of 97 different models
-#Plot category1 vs Price
-ggplot(bikeVendors, aes(x = category1, y = price)) + geom_boxplot() + coord_flip()
-##Mountain category got extensive range of Price and got highest price
-#Plot category1 vs Price
-ggplot(bikeVendors, aes(x = category2, y = price)) + geom_boxplot() + coord_flip()
-##Top Highest Price for Cross Country Race and Over Mountain, Lowest price is for Sport
-#Plot frame vs Price
-ggplot(bikeVendors, aes(x = frame, y = price)) + geom_boxplot() + coord_flip()
-##Carbon frame got Highest price and Aluminum got lowest price
+##    0%   10%   20%   30%   40%   50%   60%   70%   80%   90%  100% 
+##   415  1060  1768  2130  2660  3200  3730  4560  5948  7990 12790 
+
+#Checking the summary of unique counts for model, category1, category2 and frame
+table(model)
+##97 unique models
+table(category1)
+##51 Mountain and 46 Road 
+table(category2)
+##Highest count is 21 for Elite Road and lowest count is 2 for Fat Bike
+table(frame)
+##40 Aluminum frames and 57 Carbon frames
+
+#Checking Mean values
+tapply(bikeVendors$price, bikeVendors$model, mean)
+##Lowest Price is for Catalyst 4, of 415
+##Highest value is for 2 models Scalpel-Si Black Inc. and Supersix Evo Black Inc., of 12790
+tapply(bikeVendors$price, bikeVendors$category1, mean)
+##Mountain Mean got highest value of 4255.294 and Road Mean value of 3619.457
+tapply(bikeVendors$price, bikeVendors$category2, mean)
+##Highest Mean is for Cross Country Race, value of 5696.3158 
+##Lowest Mean is for Sport, valuse of 881.1111 
+tapply(bikeVendors$price, bikeVendors$frame, mean)
+##Aluminum Mean is 1979.625 and Carbon Mean got highest value of 5339.123 
+
+#Checking SD values
+tapply(bikeVendors$price, bikeVendors$model, sd)
+##NA
+tapply(bikeVendors$price, bikeVendors$category1, sd)
+##Mountain SD value 3042.408 and Road SD value of 2663.310
+tapply(bikeVendors$price, bikeVendors$category2, sd)
+##Highest SD value is for Elite Road of 3170.9898 
+##Lowest SD value is for Sport of 383.8276 
+tapply(bikeVendors$price, bikeVendors$frame, sd)
+##Aluminum SD is 1135.321 and Carbon SD got highest value of 2916.185 
+
+#barplot for 4 different independent variables vs price variable
+ggplot(bikeVendors, aes(x = model, y = price, color="blue")) + geom_boxplot() + coord_flip()
+ggplot(bikeVendors, aes(x = category1, y = price, color="blue")) + geom_boxplot() + coord_flip()
+ggplot(bikeVendors, aes(x = category2, y = price, color="blue")) + geom_boxplot() + coord_flip()
+ggplot(bikeVendors, aes(x = frame, y = price, color="blue")) + geom_boxplot() + coord_flip()  
+
+#Interaction plots frame vs 2 different categories over price 
+interaction.plot(bikeVendors$frame, bikeVendors$category1, bikeVendors$price)
+interaction.plot(bikeVendors$frame, bikeVendors$category2, bikeVendors$price)

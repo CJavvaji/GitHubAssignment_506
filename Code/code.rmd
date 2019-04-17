@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Title: GitHubAssignment_506_FinalProject #
 ## I have choosen bikeVedors data for my final project. ##
 ## Author: Chaithanya Javvaji ##
@@ -99,8 +104,9 @@ interaction.plot(bikeVendors$frame, bikeVendors$category2, bikeVendors$price)
 ##Minimum Price for category2
 ##881.1111 is for Sport category 
 ##Maximum price for frame
-##1979.625 is for Aluminum  frame 
-##Minimum Price for frame
 ##5339.123 is for Carbon frame
+##Minimum Price for frame
+##1979.625 is for Aluminum  frame 
+
 
 
